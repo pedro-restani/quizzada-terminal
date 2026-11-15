@@ -98,8 +98,12 @@ void main() {
     };
   }).toList();
 
+  final perguntasEmbaralhadas = perguntasFiltradas
+      .map((pergunta) => pergunta.embaralharAlternativas())
+      .toList();
+
   final jogador = Jogador(nome: nome);
-  final partida = Partida(jogador: jogador, perguntas: perguntasFiltradas);
+  final partida = Partida(jogador: jogador, perguntas: perguntasEmbaralhadas);
 
   int numPergunta = 1;
 

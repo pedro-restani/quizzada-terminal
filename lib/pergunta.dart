@@ -13,6 +13,25 @@ class Pergunta {
     required this.dificuldade,
   });
 
+  Pergunta embaralharAlternativas() {
+    List<int> indices = List.generate(alternativas.length, (index) => index);
+
+    indices.shuffle();
+
+    List<String> alternativasEmbaralhadas = indices
+        .map((indice) => alternativas[indice])
+        .toList();
+
+    int novoIndiceCorreto = indices.indexOf(indiceCorreto);
+
+    return Pergunta(
+      texto: texto,
+      alternativas: alternativasEmbaralhadas,
+      indiceCorreto: novoIndiceCorreto,
+      dificuldade: dificuldade,
+    );
+  }
+
   factory Pergunta.fromMap(Map<String, dynamic> mapa) {
     return Pergunta(
       texto: mapa['texto'] as String,
