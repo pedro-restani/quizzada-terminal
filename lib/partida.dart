@@ -24,12 +24,12 @@ class Partida {
     }
   }
 
-  int validarEntrada() {
+  int? validarEntrada() {
     stdout.write('Sua resposta: ');
     String? resposta = stdin.readLineSync();
 
     if (resposta == null) {
-      throw RespostaInvalidaException('Não foi possível ler a resposta.');
+      return null;
     }
 
     String respostaFormatada = resposta.trim().toUpperCase();

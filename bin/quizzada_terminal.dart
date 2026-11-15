@@ -72,8 +72,13 @@ void main() {
 
     while (!respostaValida) {
       try {
-        int indiceResposta = partida.validarEntrada();
+        int? indiceResposta = partida.validarEntrada();
 
+        if (indiceResposta == null){
+          print("\nEntrada encerrada. Partida cancelada.");
+          return;
+        }
+        
         partida.verificarResposta(pergunta, indiceResposta);
         respostaValida = true;
       } on RespostaInvalidaException catch (e) {
