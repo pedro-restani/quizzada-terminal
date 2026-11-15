@@ -64,9 +64,8 @@ void main() {
 
   print("\n=== Dificuldade ===");
   print("1) Somente perguntas fáceis");
-  print("2) Somente perguntas médias");
-  print("3) Somente perguntas difíceis");
-  print("4) Sem preferência de dificuldade");
+  print("2) Somente perguntas difíceis");
+  print("3) Sem preferência de dificuldade");
 
   while (opcaoDificuldade == null) {
     stdout.write("Escolha uma opção: ");
@@ -85,19 +84,16 @@ void main() {
       opcaoDificuldade = 2;
     } else if (resposta == '3') {
       opcaoDificuldade = 3;
-    } else if (resposta == '4') {
-      opcaoDificuldade = 4;
     } else {
-      print("Opção inválida. Escolha 1, 2, 3 ou 4.");
+      print("Opção inválida. Escolha 1, 2 ou 3.");
     }
   }
 
   final perguntasFiltradas = perguntas.where((pergunta) {
     return switch (opcaoDificuldade) {
       1 => pergunta.dificuldade == Dificuldade.facil,
-      2 => pergunta.dificuldade == Dificuldade.media,
-      3 => pergunta.dificuldade == Dificuldade.dificil,
-      4 => true,
+      2 => pergunta.dificuldade == Dificuldade.dificil,
+      3 => true,
       _ => false,
     };
   }).toList();
