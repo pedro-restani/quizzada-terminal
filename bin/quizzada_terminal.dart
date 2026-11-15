@@ -4,6 +4,7 @@ import 'package:quizzada_terminal/jogador.dart';
 import 'package:quizzada_terminal/partida.dart';
 import 'package:quizzada_terminal/pergunta.dart';
 import 'package:quizzada_terminal/resposta_invalida_exception.dart';
+import 'package:quizzada_terminal/dificuldade.dart';
 
 void main() {
   final dadosPerguntas = <Map<String, dynamic>>[
@@ -48,7 +49,7 @@ void main() {
     String? entrada = stdin.readLineSync();
 
     if (entrada == null) {
-      print('\nEntrada encerrada.');
+      print('\nEntrada encerrada. Partida cancelada.');
       return;
     }
 
@@ -59,8 +60,50 @@ void main() {
     }
   }
 
+  int? opcaoDificuldade;
+
+  print("\n=== Dificuldade ===");
+  print("1) Somente perguntas fáceis");
+  print("2) Somente perguntas médias");
+  print("3) Somente perguntas difíceis");
+  print("4) Sem preferência de dificuldade");
+
+  while (opcaoDificuldade == null) {
+    stdout.write("Escolha uma opção: ");
+    String? entrada = stdin.readLineSync();
+
+    if (entrada == null) {
+      print("\nEntrada encerrada. Partida cancelada.");
+      return;
+    }
+
+    String resposta = entrada.trim();
+
+    if (resposta == '1') {
+      opcaoDificuldade = 1;
+    } else if (resposta == '2') {
+      opcaoDificuldade = 2;
+    } else if (resposta == '3') {
+      opcaoDificuldade = 3;
+    } else if (resposta == '4') {
+      opcaoDificuldade = 4;
+    } else {
+      print("Opção inválida. Escolha 1, 2, 3 ou 4.");
+    }
+  }
+
+  final perguntasFiltradas = perguntas.where((pergunta) {
+    return switch (opcaoDificuldade) {
+      1 => pergunta.dificuldade == Dificuldade.facil,
+      2 => pergunta.dificuldade == Dificuldade.media,
+      3 => pergunta.dificuldade == Dificuldade.dificil,
+      4 => true,
+      _ => false,
+    };
+  }).toList();
+
   final jogador = Jogador(nome: nome);
-  final partida = Partida(jogador: jogador, perguntas: perguntas);
+  final partida = Partida(jogador: jogador, perguntas: perguntasFiltradas);
 
   int numPergunta = 1;
 
@@ -74,11 +117,11 @@ void main() {
       try {
         int? indiceResposta = partida.validarEntrada();
 
-        if (indiceResposta == null){
+        if (indiceResposta == null) {
           print("\nEntrada encerrada. Partida cancelada.");
           return;
         }
-        
+
         partida.verificarResposta(pergunta, indiceResposta);
         respostaValida = true;
       } on RespostaInvalidaException catch (e) {
