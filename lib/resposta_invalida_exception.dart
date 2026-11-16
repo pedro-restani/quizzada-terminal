@@ -1,7 +1,7 @@
 class RespostaInvalidaException implements Exception {
   final String mensagem;
 
-  //Construtor padrão
+  // Construtor padrão
   RespostaInvalidaException(this.mensagem);
 
   @override

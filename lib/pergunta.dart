@@ -6,7 +6,7 @@ class Pergunta {
   final int indiceCorreto;
   final Dificuldade dificuldade;
 
-  //Construtor padrão
+  // Construtor padrão
   Pergunta({
     required this.texto,
     required this.alternativas,
@@ -14,7 +14,7 @@ class Pergunta {
     required this.dificuldade,
   });
 
-  //Método que embaralha as alternativas de uma pergunta
+  // Método que embaralha as alternativas de uma pergunta
   Pergunta embaralharAlternativas() {
     List<int> indices = List.generate(alternativas.length, (index) => index);
 
@@ -34,7 +34,7 @@ class Pergunta {
     );
   }
 
-  //Construtor factory fromMap 
+  // Construtor factory fromMap
   factory Pergunta.fromMap(Map<String, dynamic> mapa) {
     return Pergunta(
       texto: mapa['texto'] as String,

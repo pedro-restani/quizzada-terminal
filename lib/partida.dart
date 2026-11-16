@@ -9,10 +9,10 @@ class Partida {
   final List<Pergunta> perguntas;
   static const List<String> itens = ['A', 'B', 'C', 'D'];
 
-  //Construtor padrão
+  // Construtor padrão
   Partida({required this.jogadores, required this.perguntas});
 
-  //Método que gera a interface de cada pergunta
+  // Método que gera a interface de cada pergunta
   void apresentarPergunta(Pergunta pergunta, int numero) {
     print(
       "Pergunta $numero/${perguntas.length} (${pergunta.dificuldade.name}, ${pergunta.dificuldade.pontos} pts)",
@@ -25,7 +25,7 @@ class Partida {
     }
   }
 
-  //Método que valida a resposta para cada pergunta
+  // Método que valida a resposta para cada pergunta
   int? validarEntrada() {
     stdout.write('Sua resposta: ');
     String? resposta = stdin.readLineSync();
@@ -46,7 +46,7 @@ class Partida {
     return indiceResposta;
   }
 
-  //Método que verifica se a resposta escolhida é a correta
+  // Método que verifica se a resposta escolhida é a correta
   void verificarResposta(
     Jogador jogador,
     Pergunta pergunta,
@@ -63,7 +63,7 @@ class Partida {
     }
   }
 
-  //Método que mostra o placar (ranking) ao final da partida
+  // Método que mostra o placar (ranking) ao final da partida
   void mostrarPlacar() {
     List<Jogador> ranking = List.from(jogadores);
 
