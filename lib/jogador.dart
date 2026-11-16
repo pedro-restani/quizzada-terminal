@@ -3,5 +3,6 @@ class Jogador {
   int pontos = 0;
   int acertos = 0;
 
+  //Construtor padrão
   Jogador({required this.nome});
 }

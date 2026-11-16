@@ -7,6 +7,7 @@ import 'package:quizzada_terminal/pergunta.dart';
 import 'package:quizzada_terminal/resposta_invalida_exception.dart';
 
 void main() {
+  //Criando as perguntas
   final dadosPerguntas = <Map<String, dynamic>>[
     {
       'texto': 'Qual linguagem é usada no Flutter?',
@@ -42,7 +43,10 @@ void main() {
 
   final perguntas = dadosPerguntas.map(Pergunta.fromMap).toList();
 
+  //Coletando o número de jogadores
   int? quantidadeJogadores;
+
+  print("");
 
   while (quantidadeJogadores == null) {
     stdout.write("Quantos jogadores participarão? ");
@@ -62,6 +66,7 @@ void main() {
     }
   }
 
+  //Coletando o nome de cada jogador
   final jogadores = <Jogador>[];
 
   for (int i = 0; i < quantidadeJogadores; i++) {
@@ -86,6 +91,7 @@ void main() {
     jogadores.add(Jogador(nome: nome));
   }
 
+  //Coletando o nível de dificuldade selecionado
   int? opcaoDificuldade;
 
   print("\n=== Dificuldade ===");
@@ -115,6 +121,7 @@ void main() {
     }
   }
 
+  //Filtrando as perguntas com base no nível de dificuldade escolhido
   final perguntasFiltradas = perguntas.where((pergunta) {
     return switch (opcaoDificuldade) {
       1 => pergunta.dificuldade == Dificuldade.facil,
@@ -124,15 +131,18 @@ void main() {
     };
   }).toList();
 
+  //Embaralhando as alternativas de cada pergunta
   final perguntasEmbaralhadas = perguntasFiltradas
       .map((pergunta) => pergunta.embaralharAlternativas())
       .toList();
 
+  //Criando a partida
   final partida = Partida(
     jogadores: jogadores,
     perguntas: perguntasEmbaralhadas,
   );
 
+  //Gerenciado a interface da partida
   for (
     int indicePergunta = 0;
     indicePergunta < partida.perguntas.length;
@@ -147,6 +157,7 @@ void main() {
 
     partida.apresentarPergunta(pergunta, indicePergunta + 1);
 
+    //Validando as respostas de cada pergunta
     bool respostaValida = false;
 
     while (!respostaValida) {
@@ -166,6 +177,8 @@ void main() {
     }
   }
 
-  print('');
+  print("");
+
+  //Mostrando o placar final
   partida.mostrarPlacar();
 }
