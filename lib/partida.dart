@@ -5,12 +5,11 @@ import 'resposta_invalida_exception.dart';
 import 'dart:io';
 
 class Partida {
-  final Jogador jogador;
+  final List<Jogador> jogadores;
   final List<Pergunta> perguntas;
-  int acertos = 0;
   static const List<String> itens = ['A', 'B', 'C', 'D'];
 
-  Partida({required this.jogador, required this.perguntas});
+  Partida({required this.jogadores, required this.perguntas});
 
   void apresentarPergunta(Pergunta pergunta, int numero) {
     print(
@@ -44,10 +43,14 @@ class Partida {
     return indiceResposta;
   }
 
-  void verificarResposta(Pergunta pergunta, int indiceResposta) {
+  void verificarResposta(
+    Jogador jogador,
+    Pergunta pergunta,
+    int indiceResposta,
+  ) {
     if (pergunta.indiceCorreto == indiceResposta) {
       jogador.pontos += pergunta.dificuldade.pontos;
-      acertos++;
+      jogador.acertos++;
       print("Acertou! +${pergunta.dificuldade.pontos}");
     } else {
       print(
@@ -57,13 +60,26 @@ class Partida {
   }
 
   void mostrarPlacar() {
-    int totalPontos = perguntas.fold(
-      0,
-      (total, pergunta) => total + pergunta.dificuldade.pontos,
-    );
-    print("--- Placar ---");
-    print(
-      "${jogador.nome}: ${jogador.pontos}/$totalPontos pontos, $acertos/${perguntas.length} acertos",
-    );
+    print("=== Placar ===");
+
+    for (int i = 0; i < jogadores.length; i++) {
+      Jogador jogador = jogadores[i];
+
+      List<Pergunta> perguntasDoJogador = [];
+
+      for (int j = i; j < perguntas.length; j += jogadores.length) {
+        perguntasDoJogador.add(perguntas[j]);
+      }
+
+      int totalPontos = perguntasDoJogador.fold(
+        0,
+        (total, pergunta) => total + pergunta.dificuldade.pontos,
+      );
+
+      print(
+        "${jogador.nome}: ${jogador.pontos}/$totalPontos pontos, "
+        "${jogador.acertos}/${perguntasDoJogador.length} acertos",
+      );
+    }
   }
 }

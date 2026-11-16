@@ -42,22 +42,48 @@ void main() {
 
   final perguntas = dadosPerguntas.map(Pergunta.fromMap).toList();
 
-  String nome = '';
+  int? quantidadeJogadores;
 
-  while (nome.isEmpty) {
-    stdout.write('Digite seu nome: ');
+  while (quantidadeJogadores == null) {
+    stdout.write("Quantos jogadores participarão? ");
     String? entrada = stdin.readLineSync();
 
     if (entrada == null) {
-      print('\nEntrada encerrada. Partida cancelada.');
+      print("\nEntrada encerrada. Partida cancelada. ");
       return;
     }
 
-    nome = entrada.trim();
+    int? quantidade = int.tryParse(entrada.trim());
 
-    if (nome.isEmpty) {
-      print('O nome não pode estar vazio. Tente novamente.');
+    if (quantidade != null && quantidade >= 1) {
+      quantidadeJogadores = quantidade;
+    } else {
+      print("Informe um número inteiro igual ou superior a 1.");
     }
+  }
+
+  final jogadores = <Jogador>[];
+
+  for (int i = 0; i < quantidadeJogadores; i++) {
+    String nome = '';
+
+    while (nome.isEmpty) {
+      stdout.write('Nome do jogador ${i + 1}: ');
+      String? entrada = stdin.readLineSync();
+
+      if (entrada == null) {
+        print('\nEntrada encerrada. Partida cancelada.');
+        return;
+      }
+
+      nome = entrada.trim();
+
+      if (nome.isEmpty) {
+        print('O nome não pode estar vazio. Tente novamente.');
+      }
+    }
+
+    jogadores.add(Jogador(nome: nome));
   }
 
   int? opcaoDificuldade;
@@ -102,14 +128,24 @@ void main() {
       .map((pergunta) => pergunta.embaralharAlternativas())
       .toList();
 
-  final jogador = Jogador(nome: nome);
-  final partida = Partida(jogador: jogador, perguntas: perguntasEmbaralhadas);
+  final partida = Partida(
+    jogadores: jogadores,
+    perguntas: perguntasEmbaralhadas,
+  );
 
-  int numPergunta = 1;
+  for (
+    int indicePergunta = 0;
+    indicePergunta < partida.perguntas.length;
+    indicePergunta++
+  ) {
+    Pergunta pergunta = partida.perguntas[indicePergunta];
 
-  for (Pergunta pergunta in partida.perguntas) {
-    print('');
-    partida.apresentarPergunta(pergunta, numPergunta);
+    int indiceJogador = indicePergunta % partida.jogadores.length;
+    Jogador jogadorAtual = partida.jogadores[indiceJogador];
+
+    print("\n=== Vez de ${jogadorAtual.nome} ===");
+
+    partida.apresentarPergunta(pergunta, indicePergunta + 1);
 
     bool respostaValida = false;
 
@@ -122,14 +158,12 @@ void main() {
           return;
         }
 
-        partida.verificarResposta(pergunta, indiceResposta);
+        partida.verificarResposta(jogadorAtual, pergunta, indiceResposta);
         respostaValida = true;
       } on RespostaInvalidaException catch (e) {
         print(e);
       }
     }
-
-    numPergunta++;
   }
 
   print('');
