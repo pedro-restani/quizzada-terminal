@@ -22,6 +22,29 @@ void main() {
       'dificuldade': 'facil',
     },
     {
+      'texto': 'Qual comando verifica a versão instalada do Dart?',
+      'alternativas': [
+        'dart run',
+        'dart --version',
+        'dart analyze',
+        'dart pub get',
+      ],
+      'indiceCorreto': 1,
+      'dificuldade': 'facil',
+    },
+    {
+      'texto': 'Qual comando do Git registra alterações no histórico local?',
+      'alternativas': ['git push', 'git status', 'git commit', 'git clone'],
+      'indiceCorreto': 2,
+      'dificuldade': 'facil',
+    },
+    {
+      'texto': 'Qual símbolo encerra a maioria das instruções em Dart?',
+      'alternativas': [':', '.', ',', ';'],
+      'indiceCorreto': 3,
+      'dificuldade': 'facil',
+    },
+    {
       'texto': 'Qual palavra-chave define uma classe em Dart?',
       'alternativas': ['object', 'class', 'new', 'void'],
       'indiceCorreto': 1,
@@ -34,9 +57,52 @@ void main() {
       'dificuldade': 'media',
     },
     {
+      'texto': 'Qual palavra-chave declara uma variável que só pode receber um valor uma vez em Dart?',
+      'alternativas': ['var', 'late', 'final', 'dynamic'],
+      'indiceCorreto': 2,
+      'dificuldade': 'media',
+    },
+    {
+      'texto': 'Qual método retorna apenas os elementos de uma lista que satisfazem uma condição?',
+      'alternativas': ['map()', 'where()', 'add()', 'shuffle()'],
+      'indiceCorreto': 1,
+      'dificuldade': 'media',
+    },
+    {
+      'texto':
+          'Qual operador fornece um valor padrão quando uma expressão é nula?',
+      'alternativas': ['??', '&&', '!=', '=>'],
+      'indiceCorreto': 0,
+      'dificuldade': 'media',
+    },
+    {
       'texto': 'Qual palavra-chave lança uma exceção?',
       'alternativas': ['catch', 'throw', 'try', 'on'],
       'indiceCorreto': 1,
+      'dificuldade': 'dificil',
+    },
+    {
+      'texto': 'Qual tipo de construtor pode retornar uma instância existente em Dart?',
+      'alternativas': ['const', 'factory', 'super', 'late'],
+      'indiceCorreto': 1,
+      'dificuldade': 'dificil',
+    },
+    {
+      'texto': 'Qual método acumula os elementos de uma coleção em um único resultado?',
+      'alternativas': ['where()', 'map()', 'fold()', 'toList()'],
+      'indiceCorreto': 2,
+      'dificuldade': 'dificil',
+    },
+    {
+      'texto': 'Qual recurso do Dart permite verificar padrões em uma expressão switch?',
+      'alternativas': ['Patterns', 'Imports', 'Mixins', 'Futures'],
+      'indiceCorreto': 0,
+      'dificuldade': 'dificil',
+    },
+    {
+      'texto': 'Qual palavra-chave relança uma exceção capturada preservando seu rastreamento original?',
+      'alternativas': ['throw', 'return', 'assert', 'rethrow'],
+      'indiceCorreto': 3,
       'dificuldade': 'dificil',
     },
   ];
