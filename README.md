@@ -49,6 +49,12 @@ As respostas aceitam letras maiúsculas ou minúsculas, além de espaços antes 
 
 Em partidas com múltiplos jogadores, as perguntas são distribuídas em turnos alternados.
 
+## Demonstração em vídeo
+
+A demonstração do funcionamento do Quizzada Terminal está disponível no Google Drive.
+
+[Assistir à demonstração do projeto](https://drive.google.com/drive/folders/15M8xA6bPg7AD2nM_TWw00JK12fKqvpuQ?usp=drive_link)
+
 ## Funcionalidades e pontuação
 
 O jogo utiliza perguntas de múltipla escolha, organizadas em três níveis de dificuldade.
