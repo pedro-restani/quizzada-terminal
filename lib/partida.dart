@@ -60,14 +60,24 @@ class Partida {
   }
 
   void mostrarPlacar() {
-    print("=== Placar ===");
+    List<Jogador> ranking = List.from(jogadores);
 
-    for (int i = 0; i < jogadores.length; i++) {
-      Jogador jogador = jogadores[i];
+    ranking.sort((a, b) => b.pontos.compareTo(a.pontos));
+
+    print("=== Ranking ===");
+
+    for (int i = 0; i < ranking.length; i++) {
+      Jogador jogador = ranking[i];
+
+      int indiceOriginal = jogadores.indexOf(jogador);
 
       List<Pergunta> perguntasDoJogador = [];
 
-      for (int j = i; j < perguntas.length; j += jogadores.length) {
+      for (
+        int j = indiceOriginal;
+        j < perguntas.length;
+        j += jogadores.length
+      ) {
         perguntasDoJogador.add(perguntas[j]);
       }
 
@@ -77,7 +87,8 @@ class Partida {
       );
 
       print(
-        "${jogador.nome}: ${jogador.pontos}/$totalPontos pontos, "
+        "${i + 1}º ${jogador.nome}: "
+        "${jogador.pontos}/$totalPontos pontos, "
         "${jogador.acertos}/${perguntasDoJogador.length} acertos",
       );
     }
