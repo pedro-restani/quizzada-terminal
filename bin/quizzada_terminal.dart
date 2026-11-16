@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:quizzada_terminal/dificuldade.dart';
 import 'package:quizzada_terminal/jogador.dart';
 import 'package:quizzada_terminal/partida.dart';
 import 'package:quizzada_terminal/pergunta.dart';
 import 'package:quizzada_terminal/resposta_invalida_exception.dart';
-import 'package:quizzada_terminal/dificuldade.dart';
 
 void main() {
   final dadosPerguntas = <Map<String, dynamic>>[

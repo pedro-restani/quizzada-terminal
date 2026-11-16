@@ -1,8 +1,8 @@
+import 'dart:io';
+
 import 'jogador.dart';
 import 'pergunta.dart';
 import 'resposta_invalida_exception.dart';
-
-import 'dart:io';
 
 class Partida {
   final List<Jogador> jogadores;
